@@ -1,0 +1,68 @@
+/*
+ _            _ _   _            
+| |          (_) | | |           
+| |___      ___| |_| |_ ___ _ __ 
+| __\ \ /\ / / | __| __/ _ \ '__|
+| |_ \ V  V /| | |_| ||  __/ |   
+ \__| \_/\_/ |_|\__|\__\___|_|   
+                                 
+                                 
+*/
+
+form[role="search"] > div:nth-child(1) > div {
+  animation: feedBorder_backlight 15s linear !important;
+  animation-iteration-count: infinite !important;
+}
+
+div[jscontroller="cnjECf"] {
+  box-shadow: 0 0 10px transparent !important;
+}
+
+/*
+             _                 _   _             
+            (_)               | | (_)            
+  __ _ _ __  _ _ __ ___   __ _| |_ _  ___  _ __  
+ / _` | '_ \| | '_ ` _ \ / _` | __| |/ _ \| '_ \ 
+| (_| | | | | | | | | | | (_| | |_| | (_) | | | |
+ \__,_|_| |_|_|_| |_| |_|\__,_|\__|_|\___/|_| |_|
+                                                 
+                                                 
+*/
+@keyframes feedBorder_backlight {
+  100%, 0% {
+    box-shadow: 0 0 10px rgb(255,0,0,0.5);
+  }
+  8% {
+    box-shadow: 0 0 10px rgb(255,127,0,0.5);
+  }
+  16% {
+    box-shadow: 0 0 10px rgb(255,255,0,0.5);
+  }
+  25% {
+    box-shadow: 0 0 10px rgb(127,255,0,0.5);
+  }
+  33% {
+    box-shadow: 0 0 10px rgb(0,255,0,0.5);
+  }
+  41% {
+    box-shadow: 0 0 10px rgb(0,255,127,0.5);
+  }
+  50% {
+    box-shadow: 0 0 10px rgb(0,255,255,0.5);
+  }
+  58% {
+    box-shadow: 0 0 10px rgb(0,127,255,0.5);
+  }
+  66% {
+    box-shadow: 0 0 10px rgb(0,0,255,0.5);
+  }
+  75% {
+    box-shadow: 0 0 10px rgb(127,0,255,0.5);
+  }
+  83% {
+    box-shadow: 0 0 10px rgb(255,0,255,0.5);
+  }
+  91% {
+    box-shadow: 0 0 10px rgb(255,0,127,0.5);
+  }
+}
