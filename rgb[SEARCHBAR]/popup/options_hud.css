@@ -136,3 +136,28 @@ body {
   text-align: center;
   text-shadow: 0 0 10px white;
 }
+
+#save_button {
+  margin-top: 7.5px;
+  margin-left: 20px;
+  cursor: pointer;
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 30px;
+  background-color: rgb(190, 60, 60);
+  color: #ffffff;
+  text-shadow: 0 0 10px black;
+  line-height: 0.9;
+  border: none;
+  border-radius: 20px;
+  padding: 20px;
+  padding-left: 250px;
+  padding-right: 210px;
+
+  box-shadow: 0 0 20px rgb(190, 60, 60);
+  transition: box-shadow 0.2s;
+}
+
+#save_button:hover {
+  box-shadow: 0 0 30px rgb(190, 60, 60);
+}
