@@ -54,4 +54,23 @@ document.addEventListener("DOMContentLoaded", function () {
       chrome.tabs.sendMessage(tabs[0].id, inputMsg);
     }
   })
+
+  //save button
+  /*
+  document.getElementById("save_button").addEventListener("click", function() {
+    console.log("saved");
+
+    let params = {
+      active: true,
+      currentWindow: true
+    }
+
+    chrome.tabs.query(params, gotTab);
+
+    function gotTab(tabs) {
+      var inputMsg = "saved";
+      chrome.tabs.sendMessage(tabs[0].id, inputMsg);
+    }
+  })
+  */
 })
