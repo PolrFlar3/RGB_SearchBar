@@ -14,8 +14,8 @@
 }
 
 .RNNXgb {
-  animation: chroma_backlight 10s linear;
-  animation-iteration-count: infinite;
+  animation: chroma_backlight 10s linear !important;
+  animation-iteration-count: infinite !important;
 }
 
 .A8SBwf {
