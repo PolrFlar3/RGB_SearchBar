@@ -1,3 +1,5 @@
+//PolrFlare#7193
+
 var getLink = window.location.href;
 
 if (getLink.includes("www.google.com") || getLink.includes("twitter.com") || getLink.includes("www.youtube.com")) {
@@ -38,8 +40,7 @@ const injectStyles = () => {
 
 
 
-//options
-
+//OPTIONS
 //hide light
 const hideLight = (hideBacklight, classID) => {
   addStyles(
@@ -52,44 +53,9 @@ const hideLight = (hideBacklight, classID) => {
   );
 };
 
-const hideLightTW = (hideBacklight, classID) => {
-  addStyles(
-    "hide_backlight",
-    `` +
-    classID + ` {
-      box-shadow: 0 0 10px transparent !important;
-    }
-    `
-  );
-};
-
-const hideLightYT = (hideBacklight, classID) => {
-  addStyles(
-    "hide_backlight",
-    `` +
-    classID + ` {
-      box-shadow: 0 0 10px transparent !important;
-    }
-    `
-  );
-};
-
 //add light
-
 var preSpeed = "10s";
 const addLight = (addBackLight, preSpeed, classID) => {
-  addStyles(
-    "add_backlight",
-    `` +
-    classID + ` {
-      animation: chroma_backlight ` + preSpeed + ` linear !important;
-      animation-iteration-count: infinite !important;
-    }
-    `
-  );
-}
-
-const addLightYT = (addBackLight, preSpeed, classID, classID2) => {
   addStyles(
     "add_backlight",
     `` +
@@ -120,7 +86,7 @@ function catchMessage(message, sender, sendResponse) {
 
         addLight(undefined, undefined, ".RNNXgb");
 
-        chrome.storage.local.set({google: "chromaBar"}, function() {});
+        chrome.storage.sync.set({google: "chromaBar"}, function() {});
       
       } else if (getLink.includes("www.youtube.com")) {
 
@@ -130,7 +96,7 @@ function catchMessage(message, sender, sendResponse) {
         
         addLight(undefined, undefined, "#search-form #container.ytd-searchbox");
 
-        chrome.storage.local.set({youtube: "chromaBar"}, function() {});
+        chrome.storage.sync.set({youtube: "chromaBar"}, function() {});
 
       } else if (getLink.includes("twitter.com")) {
 
@@ -139,7 +105,7 @@ function catchMessage(message, sender, sendResponse) {
 
         addLight(undefined, undefined, 'form[role="search"] > div:nth-child(1) > div');
 
-        chrome.storage.local.set({twitter: "chromaBar"}, function() {});
+        chrome.storage.sync.set({twitter: "chromaBar"}, function() {});
 
       }
       break;
@@ -153,25 +119,25 @@ function catchMessage(message, sender, sendResponse) {
 
         hideLight(undefined, ".RNNXgb");
 
-        chrome.storage.local.set({google: "hideBar"}, function() {});
+        chrome.storage.sync.set({google: "hideBar"}, function() {});
 
       } else if (getLink.includes("www.youtube.com")) {
 
         removeElement("add_backlight");
         console.log("backlight deactivated");
 
-        hideLightYT(undefined, "#search-form #container.ytd-searchbox");
+        hideLight(undefined, "#search-form #container.ytd-searchbox");
 
-        chrome.storage.local.set({youtube: "hideBar"}, function() {});
+        chrome.storage.sync.set({youtube: "hideBar"}, function() {});
 
       } else if (getLink.includes("twitter.com")) {
 
         removeElement("add_backlight");
         console.log("backlight deactivated");
 
-        hideLightTW(undefined, 'form[role="search"] > div:nth-child(1) > div');
+        hideLight(undefined, 'form[role="search"] > div:nth-child(1) > div');
 
-        chrome.storage.local.set({twitter: "hideBar"}, function() {});
+        chrome.storage.sync.set({twitter: "hideBar"}, function() {});
 
       }
       break;
@@ -189,17 +155,17 @@ function catchMessage(message, sender, sendResponse) {
     if (getLink.includes("www.google.com")) {
       removeElement("hide_backlight");
       addLight(undefined, speed, ".RNNXgb");
-      chrome.storage.local.set({speedG: message}, function() {});
+      chrome.storage.sync.set({speedG: message}, function() {});
 
     } else if (getLink.includes("www.youtube.com")) {
       removeElement("hide_backlight");
       addLightYT(undefined, speed, "#search-form #container.ytd-searchbox");
-      chrome.storage.local.set({speedY: message}, function() {});
+      chrome.storage.sync.set({speedY: message}, function() {});
 
     } else if (getLink.includes("twitter.com")) {
       removeElement("hide_backlight");
       addLight(undefined, speed, 'form[role="search"] > div:nth-child(1) > div');
-      chrome.storage.local.set({speedT: message}, function() {});
+      chrome.storage.sync.set({speedT: message}, function() {});
 
     }
     
@@ -219,7 +185,7 @@ inject();
 //chrome storage handler
 if (getLink.includes("www.google.com")) {
 
-  chrome.storage.local.get(["google"]["speedG"], function(result) {
+  chrome.storage.sync.get(["google"]["speedG"], function(result) {
 
     console.log("%c set speed to " + result.speedG + "s", "color: rgb(0, 150, 255);");
     var speed = result.speedG + "s";
@@ -246,37 +212,9 @@ if (getLink.includes("www.google.com")) {
     }
   });
 
-} else if (getLink.includes("twitter.com")) {
-
-  chrome.storage.local.get(["twitter"]["speedT"], function(result) {
-
-    console.log("%c set speed to " + result.speedT + "s", "color: rgb(0, 150, 255);");
-    var speed = result.speedT + "s";
-    var convSpeed = parseFloat(result.speedT);
-    console.log("%c current speed: " + result.speedT, "color: red;");
-  
-    if (result.twitter == "hideBar") {
-  
-      console.log("%c set to " + result.twitter, "color: rgb(50, 255, 0);");
-      console.log("backlight deactivated[SAVED] - twitter");
-      removeElement("add_backlight");
-  
-      hideLight(undefined, 'form[role="search"] > div:nth-child(1) > div');
-  
-    } else if (result.twitter == "chromaBar") {
-  
-      console.log("%c set to " + result.twitter, "color: rgb(50, 255, 0);");
-      console.log("backlight activated[SAVED] - twitter");
-      removeElement("hide_backlight");
-  
-  
-      addLight(undefined, speed, 'form[role="search"] > div:nth-child(1) > div');
-  
-    }
-  });
 }  else if (getLink.includes("www.youtube.com")) {
 
-  chrome.storage.local.get(["youtube"]["speedY"], function(result) {
+  chrome.storage.sync.get(["youtube"]["speedY"], function(result) {
 
     console.log("%c set speed to " + result.speedY + "s", "color: rgb(0, 150, 255);");
     var speed = result.speedY + "s";
@@ -302,6 +240,34 @@ if (getLink.includes("www.google.com")) {
   
     }
   });
-}else if (getLink.includes("www.thisisaplaceholder.com")) {
-  console.log("");
+
+} else if (getLink.includes("twitter.com")) {
+
+  chrome.storage.sync.get(["twitter"]["speedT"], function(result) {
+
+    console.log("%c set speed to " + result.speedT + "s", "color: rgb(0, 150, 255);");
+    var speed = result.speedT + "s";
+    var convSpeed = parseFloat(result.speedT);
+    console.log("%c current speed: " + result.speedT, "color: red;");
+  
+    if (result.twitter == "hideBar") {
+  
+      console.log("%c set to " + result.twitter, "color: rgb(50, 255, 0);");
+      console.log("backlight deactivated[SAVED] - twitter");
+      removeElement("add_backlight");
+  
+      hideLight(undefined, 'form[role="search"] > div:nth-child(1) > div');
+  
+    } else if (result.twitter == "chromaBar") {
+  
+      console.log("%c set to " + result.twitter, "color: rgb(50, 255, 0);");
+      console.log("backlight activated[SAVED] - twitter");
+      removeElement("hide_backlight");
+  
+  
+      addLight(undefined, speed, 'form[role="search"] > div:nth-child(1) > div');
+  
+    }
+  });
+  
 }
